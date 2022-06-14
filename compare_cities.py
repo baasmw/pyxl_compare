@@ -1,8 +1,8 @@
 ## Collect data from separate Excel files and output the cities that exist in both files
 import os, sys, openpyxl
-original_cities = []
-compared_cities = []
-difference = []
+original_data = []
+reference_data = []
+matches = []
 
 ## Location of script
 location = os.path.realpath( os.path.join( os.getcwd(), os.path.dirname( sys.argv[0] ) ) )
@@ -21,15 +21,15 @@ def get_cities( citylist, output ):
 		for name in city:
 			output.append( name.value )
 
-get_cities( original, original_cities )
-get_cities( reference, compared_cities )
+get_cities( original, original_data )
+get_cities( reference, reference_data )
 
 ## Collect results in an array
-for value in original_cities:
-	if value in compared_cities:
-		difference.append( value )
+for value in original_data:
+	if value in reference_data:
+		matches.append( value )
 
 ## Output the matching values
-print( str( len( difference ) ) + " matches:" )
-for result in difference:
+print( str( len( matches ) ) + " matches:" )
+for result in matches:
 	print( result )
